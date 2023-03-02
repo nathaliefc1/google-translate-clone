@@ -1,7 +1,13 @@
-const TextBox = ({style}) => {
+import SelectDropDown from "./SelectDropDown"
+
+const TextBox = ({style, selectedLanguage}) => {
 
     return (
-        <div>
+        <div className={style}>
+            <SelectDropDown
+                style= {style}
+                selectedLanguage={selectedLanguage}
+            />
             <textarea
                 placeholder={style === 'input'? 'Enter Text' : 'Translation'}
                 disabled={style === 'output'}
