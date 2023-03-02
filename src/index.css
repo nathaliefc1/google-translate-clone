@@ -103,7 +103,7 @@ input {
   padding: 0;
   height: 1300px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   overflow: auto;
 }
