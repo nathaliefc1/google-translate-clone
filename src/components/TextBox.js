@@ -15,7 +15,7 @@ const TextBox = ({style, selectedLanguage, setShowModal}) => {
             />
             <textarea
                 placeholder={style == 'input'? 'Enter Text' : 'Translation'}
-                disabled={style === 'output'}
+                disabled={style == 'output'}
                 />
         </div>
     )

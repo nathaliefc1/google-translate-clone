@@ -10,6 +10,7 @@ const App = () => {
   const [inputLanguage, setInputLanguage] = useState("English")
   const [outputLanguage, setOutputLanguage] = useState("Spanish")
   const [languages, setLanguages] = useState(null)
+  console.log('inputLanguage', inputLanguage)
 
   const getLanguages = () => {
 
@@ -19,7 +20,7 @@ const App = () => {
       headers: {
         "X-RapidAPI-Key": "4dacad5a75msh75dcb058db2a252p1e46c9jsn2b4e47070888",
         "X-RapidAPI-Host": "g-translate1.p.rapidapi.com",
-      },
+      }
     }
 
     axios
@@ -33,7 +34,6 @@ const App = () => {
         console.error(error)
       })
   }
-  console.log('languages', languages)
 
   useEffect(()=> {
     getLanguages()
@@ -42,7 +42,10 @@ const App = () => {
   const handleClick = () => {
     setInputLanguage(outputLanguage)
     setOutputLanguage(inputLanguage)
-  };
+  }
+
+  console.log('handleclick', handleClick)
+  console.log('inputLanguage', inputLanguage)
 
   return (
     <div className="app">
@@ -65,7 +68,14 @@ const App = () => {
           />
         </>
       )}
-      {showModal && <Modal setShowModal={setShowModal} />}
+      {showModal && 
+      <Modal 
+        setShowModal={setShowModal}
+        languages={languages}
+        chosenLanguage={showModal == 'input' ? inputLanguage : outputLanguage} 
+        setChosenLanguage={showModal == 'input' ? setInputLanguage : setOutputLanguage}
+      />
+      }
     </div>
   )
 }

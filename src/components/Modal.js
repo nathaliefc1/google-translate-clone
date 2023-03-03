@@ -1,18 +1,24 @@
 import { useState } from "react"
 
-const Modal = ({setShowModal}) => {
+const Modal = ({setShowModal, languages, chosenLanguage, setChosenLanguage}) => {
+    const [searchedLanguage, setSearchedLanguage] = useState('')
 
-    const [searchLanguage, setSearchLanguage] = useState('')
+    const filteredLanguages = languages.filter((language) => language.toLowerCase().startsWith(searchedLanguage.toLowerCase()))
 
     const handleChange = (e) => {
-        setSearchLanguage(e.trarget.value)
+        setSearchedLanguage(e.target.value)
     }
 
-    console.log(searchLanguage)
+    const handleClick = (e) => {
+        setChosenLanguage(e.target.textContent)
+        setShowModal(null)
+    }
+   console.log(searchedLanguage)
+
     return (
         <div className="option-list">
             <div className="search-bar">
-                <input value={searchLanguage} onChange={handleChange}/>
+                <input value={searchedLanguage} onChange={handleChange}/>
                 <div className="close-button" onClick={()=> setShowModal(null)}>
                     <svg
                         focusable="false"
@@ -28,7 +34,20 @@ const Modal = ({setShowModal}) => {
             </div>
             <div className="option-container">
                 <ul>
-                    
+                    {filteredLanguages?.map((filteredLanguage, _index)=>(
+                        <div className="list-item">
+                            <div className="icon">
+                                {chosenLanguage === filteredLanguage ? '✔' : ''}
+                            </div>
+                            <li
+                                key={_index}
+                                onClick={handleClick}
+                                style={{color: chosenLanguage === filteredLanguage ? '#8ab4f8': null}}
+                            >
+                                {filteredLanguage}
+                            </li>
+                        </div>
+                    ))}
                 </ul>
             </div>
         </div>
